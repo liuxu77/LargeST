@@ -3,7 +3,7 @@
 This is the official repository of our manuscript entitled LargeST: A Benchmark Dataset for Large-Scale
 Traffic Forecasting. Specifically, LargeST comprises four sub-datasets, namely, CA, GLA, GBA, and SD, each characterized by a different number of sensors. The GLA, GBA, and SD are three subsets of CA.
 
-<img src='img/overview.png' width='700px'>
+<img src='img/overview.png' width='750px'>
 
 
 ## 1. Data Preparation
@@ -12,7 +12,7 @@ In this section, we will outline the procedure for generating the CA dataset, fo
 ### 1.1 Download the CA Dataset
 We host the CA dataset on Kaggle, which can be accessed here: https://www.kaggle.com/datasets/liuxu77/largest. There are a total of 7 files in this link. Among them, 5 files in .h5 format contain the traffic flow raw data from 2017 to 2021, 1 file in .csv format provides the metadata for all sensors, and 1 file in .npy format represents the adjacency matrix constructed based on road network distances.
 
-- **If you are using the web user interface**, you can download all data from the provided [link](https://www.kaggle.com/datasets/liuxu77/largest) (the download button is at the upper right cornor of the webpage), place the downloaded archive.zip file in the `data/ca/` folder, and unzip the file.
+- **If you are using the web user interface**, you can download all data from the provided [link](https://www.kaggle.com/datasets/liuxu77/largest). The download button is at the upper right corner of the webpage. Then please place the downloaded archive.zip file in the `data/ca/` folder and unzip the file.
 
 - **If you would like to use the Kaggle API**, please follow the instructions [here](https://github.com/Kaggle/kaggle-api). After setting the API correctly, you can simply go to the `data/ca/` folder, and use the command below to download all data.
 ```
