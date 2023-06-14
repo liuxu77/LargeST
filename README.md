@@ -3,7 +3,7 @@
 This is the official repository of our manuscript entitled LargeST: A Benchmark Dataset for Large-Scale
 Traffic Forecasting. Specifically, LargeST comprises four sub-datasets, namely, CA, GLA, GBA, and SD, each characterized by a different number of sensors. The GLA, GBA, and SD are three subsets of CA.
 
-<img src='img/overview.pdf' width='900px'>
+<img src='img/overview.png' width='700px'>
 
 
 ## 1. Data Preparation
