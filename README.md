@@ -1,9 +1,8 @@
 # The LargeST Benchmark Dataset
 
-This is the official repository of our manuscript entitled LargeST: A Benchmark Dataset for Large-Scale
-Traffic Forecasting. Specifically, LargeST comprises four sub-datasets, namely, CA, GLA, GBA, and SD, each characterized by a different number of sensors. The GLA, GBA, and SD are three subsets of CA.
+This is the official repository of our manuscript entitled [LargeST: A Benchmark Dataset for Large-Scale Traffic Forecasting](https://arxiv.org/pdf/2306.08259.pdf). Specifically, LargeST comprises four sub-datasets, namely, CA, GLA, GBA, and SD, each characterized by a different number of sensors. The GLA, GBA, and SD are three subsets of CA.
 
-<img src='img/overview.png' width='750px'>
+<img src='img/overview.png' width='780px'>
 
 
 ## 1. Data Preparation
@@ -63,3 +62,15 @@ You may go through the implementations of various baselines in our repository, w
 
 ## 4. License \& Acknowledgement
 The LargeST benchmark dataset is released under a CC BY-NC 4.0 International License: https://creativecommons.org/licenses/by-nc/4.0. Our code implementation is released under the MIT License: https://opensource.org/licenses/MIT. The license of any specific baseline methods used in our codebase should be verified on their official repositories. And we would also like to express our gratitude to the authors of the baselines for releasing their code.
+
+
+## 5. Citation
+If you find our work useful in your research, please cite:
+```
+@article{liu2023large,
+  title={LargeST: A Benchmark Dataset for Large-Scale Traffic Forecasting},
+  author={Liu, Xu and Xia, Yutong and Liang, Yuxuan and Hu, Junfeng and Wang, Yiwei and Bai, Lei and Huang, Chao and Liu, Zhenguang and Hooi, Bryan and Zimmermann, Roger},
+  journal={arXiv preprint arXiv:2306.08259},
+  year={2023}
+}
+```
