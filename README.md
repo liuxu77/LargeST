@@ -1,8 +1,21 @@
 # The LargeST Benchmark Dataset
 
-This is the official repository of our manuscript entitled [LargeST: A Benchmark Dataset for Large-Scale Traffic Forecasting](https://arxiv.org/pdf/2306.08259.pdf). Specifically, LargeST comprises four sub-datasets, namely, CA, GLA, GBA, and SD, each characterized by a different number of sensors. The GLA, GBA, and SD are three subsets of CA.
+This is the official repository of our manuscript [LargeST: A Benchmark Dataset for Large-Scale Traffic Forecasting](https://arxiv.org/pdf/2306.08259.pdf). LargeST comprises four sub-datasets, each characterized by a different number of sensors. The biggest one is California (CA), including a total number of 8,600 sensors. We also construct three subsets of CA by selecting three representative areas within CA and forming the sub-datasets of Greater Los Angeles (GLA), Greater Bay Area (GBA), and San Diego (SD). The figure here shows an illustration.
 
 <img src='img/overview.png' width='780px'>
+
+In LargeST we also provide comprehensive metadata for all sensors, which are listed below.
+| Attribute |                 Description                     |  Possible Range of Values
+|   :---    |                    :---                         |          :---
+|    ID     |  The identifier of a sensor in PeMS             |  6 to 9 digits number
+|    Lat    |  The latitude of a sensor                       |  Real number
+|    Lng    |  The longitude of a sensor                      |  Real number
+|  District |  The district of a sensor in PeMS               |  3, 4, 5, 6, 7, 8, 10, 11, 12
+|   County  |  The county of a sensor in California           |  String
+|    Fwy    |  The highway where a sensor is located          |  String starts with 'I', 'US', or 'SR'
+|    Lane   |  The number of lanes where a sensor is located  |  1, 2, 3, 4, 5, 6, 7, 8
+|    Type   |  The type of a sensor                           |  Mainline
+| Direction |  The direction of the highway                   |  N, S, E, W
 
 
 ## 1. Data Preparation
@@ -38,7 +51,7 @@ python generate_data_for_training.py --dataset gla --years 2019
 
 
 ## 2. Experiments Running
-We conduct experiments on an Intel(R) Xeon(R) Gold 6140 CPU @ 2.30 GHz, 376 GB RAM computing server, equipped with an NVIDIA RTX A6000 GPU with 48 GB memory. We adopt PyTorch 1.12 as the default deep learning library. There are a total of 11 baselines in this repository.
+We conduct experiments on an Intel(R) Xeon(R) Gold 6140 CPU @ 2.30 GHz, 376 GB RAM computing server, equipped with an NVIDIA RTX A6000 GPU with 48 GB memory. We adopt PyTorch 1.12 as the default deep learning library. Currently, there are a total of 11 supported baselines in this repository, namely, Historical Last (HL), LSTM, [DCRNN](https://github.com/chnsh/DCRNN_PyTorch), [AGCRN](https://github.com/LeiBAI/AGCRN), [STGCN](https://github.com/hazdzz/STGCN), [GWNET](https://github.com/nnzhan/Graph-WaveNet), [ASTGCN](https://github.com/guoshnBJTU/ASTGCN-r-pytorch), [STGODE](https://github.com/square-coder/STGODE), [DSTAGNN](https://github.com/SYLan2019/DSTAGNN), [DGCRN](https://github.com/tsinghua-fib-lab/Traffic-Benchmark/tree/master/methods/DGCRN), and [D2STGNN](https://github.com/zezhishao/D2STGNN).
 
 To reproduce the benchmark results in the manuscript, please go to `experiments/baseline_you_want_to_run`, open the provided `run.sh` file, and uncomment the line you would like to execute. Note that you may need to specify the GPU card number on your server. Moreover, we use the flow data from 2019 for model training in our manuscript, if you want to use multiple years of data, please change the years argument to, e.g., 2018_2019.
 
@@ -53,15 +66,14 @@ python experiments/lstm/main.py --device cuda:2 --dataset CA --years 2019 --mode
 
 
 ## 3. Evaluate Your Model in Three Steps
+You may first go through the implementations of various baselines in our repository, which may serve as good references for experimenting your own model. The steps are described as follows.
 - The first step is to define the model architecture, and place it into `src/models/`. To ensure compatibility with the existing framework, it is recommended that your model inherits the BaseModel class (implemented in `src/base/model.py`).
 - If your model does not require any special training or testing procedures beyond the standard workflow provided by the BaseEngine class (implemented in `src/base/engine.py`), you can directly use it for training and evaluation. Otherwise, please include a file in the folder `src/engines/`.
 - To integrate your model and engine files, you need to create a `main.py` file in the `experiments/your_model_name` directory.
 
-You may go through the implementations of various baselines in our repository, which may serve as good references for experimenting your own model.
-
 
 ## 4. License \& Acknowledgement
-The LargeST benchmark dataset is released under a CC BY-NC 4.0 International License: https://creativecommons.org/licenses/by-nc/4.0. Our code implementation is released under the MIT License: https://opensource.org/licenses/MIT. The license of any specific baseline methods used in our codebase should be verified on their official repositories. And we would also like to express our gratitude to the authors of the baselines for releasing their code.
+The LargeST benchmark dataset is released under a CC BY-NC 4.0 International License: https://creativecommons.org/licenses/by-nc/4.0. Our code implementation is released under the MIT License: https://opensource.org/licenses/MIT. The license of any specific baseline methods used in our codebase should be verified on their official repositories. Here we would also like to express our gratitude to the authors of baselines for releasing their code.
 
 
 ## 5. Citation

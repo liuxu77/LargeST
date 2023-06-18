@@ -88,6 +88,7 @@ class BaseEngine():
         for X, label in self._dataloader['train_loader'].get_iterator():
             self._optimizer.zero_grad()
 
+            # X (b, t, n, f), label (b, t, n, 1)
             X, label = self._to_device(self._to_tensor([X, label]))
             pred = self.model(X, label)
             pred, label = self._inverse_transform([pred, label])
@@ -164,6 +165,7 @@ class BaseEngine():
         labels = []
         with torch.no_grad():
             for X, label in self._dataloader[mode + '_loader'].get_iterator():
+                # X (b, t, n, f), label (b, t, n, 1)
                 X, label = self._to_device(self._to_tensor([X, label]))
                 pred = self.model(X, label)
                 pred, label = self._inverse_transform([pred, label])

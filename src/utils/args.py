@@ -1,8 +1,5 @@
 import argparse
 
-# 0(2), 1(4), 2(8), 3(9)
-# 4(1), 5(3), 6(5), 7(7)
-# 8(0), 9(6)
 def get_public_config():
     parser = argparse.ArgumentParser()
     parser.add_argument('--device', type=str, default='')
