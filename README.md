@@ -1,6 +1,6 @@
 # The LargeST Benchmark Dataset
 
-This is the official repository of our manuscript [LargeST: A Benchmark Dataset for Large-Scale Traffic Forecasting](https://arxiv.org/pdf/2306.08259.pdf). LargeST comprises four sub-datasets, each characterized by a different number of sensors. The biggest one is California (CA), including a total number of 8,600 sensors. We also construct three subsets of CA by selecting three representative areas within CA and forming the sub-datasets of Greater Los Angeles (GLA), Greater Bay Area (GBA), and San Diego (SD). The figure here shows an illustration.
+This is the official repository of our NeurIPS 2023 DB Track paper [LargeST: A Benchmark Dataset for Large-Scale Traffic Forecasting](https://arxiv.org/abs/2306.08259). LargeST comprises four sub-datasets, each characterized by a different number of sensors. The biggest one is California (CA), including a total number of 8,600 sensors. We also construct three subsets of CA by selecting three representative areas within CA and forming the sub-datasets of Greater Los Angeles (GLA), Greater Bay Area (GBA), and San Diego (SD). The figure here shows an illustration.
 
 <img src='img/overview.png' width='780px'>
 
@@ -19,7 +19,7 @@ In LargeST we also provide comprehensive metadata for all sensors, which are lis
 
 
 ## 1. Data Preparation
-In this section, we will outline the procedure for preparing the CA dataset, followed by an explanation of how the GLA, GBA, and SD datasets can be derived from the CA dataset. Please follow these instructions step by step.
+In this section, we will outline the procedure for preparing the CA dataset, followed by an explanation of how the GLA, GBA, and SD datasets can be derived from CA. Please follow these instructions step by step.
 
 ### 1.1 Download the CA Dataset
 We host the CA dataset on Kaggle: https://www.kaggle.com/datasets/liuxu77/largest. There are a total of 7 files in this link. Among them, 5 files in .h5 format contain the traffic flow raw data from 2017 to 2021, 1 file in .csv format provides the metadata for all sensors, and 1 file in .npy format represents the adjacency matrix constructed based on road network distances.
@@ -51,7 +51,7 @@ python generate_data_for_training.py --dataset gla --years 2019
 
 
 ## 2. Experiments Running
-We conduct experiments on an Intel(R) Xeon(R) Gold 6140 CPU @ 2.30 GHz, 376 GB RAM computing server, equipped with an NVIDIA RTX A6000 GPU with 48 GB memory. We adopt PyTorch 1.12 as the default deep learning library. Currently, there are a total of 11 supported baselines in this repository, namely, Historical Last (HL), LSTM, [DCRNN](https://github.com/chnsh/DCRNN_PyTorch), [AGCRN](https://github.com/LeiBAI/AGCRN), [STGCN](https://github.com/hazdzz/STGCN), [GWNET](https://github.com/nnzhan/Graph-WaveNet), [ASTGCN](https://github.com/guoshnBJTU/ASTGCN-r-pytorch), [STGODE](https://github.com/square-coder/STGODE), [DSTAGNN](https://github.com/SYLan2019/DSTAGNN), [DGCRN](https://github.com/tsinghua-fib-lab/Traffic-Benchmark/tree/master/methods/DGCRN), and [D2STGNN](https://github.com/zezhishao/D2STGNN).
+We conduct experiments on an Intel(R) Xeon(R) Gold 6140 CPU @ 2.30 GHz, 376 GB RAM computing server, equipped with an NVIDIA RTX A6000 GPU with 48 GB memory. We adopt PyTorch 1.12 as the default deep learning library. Currently, there are a total of 12 supported baselines in this repository, namely, Historical Last (HL), LSTM, [DCRNN](https://github.com/chnsh/DCRNN_PyTorch), [AGCRN](https://github.com/LeiBAI/AGCRN), [STGCN](https://github.com/hazdzz/STGCN), [GWNET](https://github.com/nnzhan/Graph-WaveNet), [ASTGCN](https://github.com/guoshnBJTU/ASTGCN-r-pytorch), [STTN](https://github.com/xumingxingsjtu/STTN), [STGODE](https://github.com/square-coder/STGODE), [DSTAGNN](https://github.com/SYLan2019/DSTAGNN), [DGCRN](https://github.com/tsinghua-fib-lab/Traffic-Benchmark/tree/master/methods/DGCRN), and [D2STGNN](https://github.com/zezhishao/D2STGNN).
 
 To reproduce the benchmark results in the manuscript, please go to `experiments/baseline_you_want_to_run`, open the provided `run.sh` file, and uncomment the line you would like to execute. Note that you may need to specify the GPU card number on your server. Moreover, we use the flow data from 2019 for model training in our manuscript, if you want to use multiple years of data, please change the years argument to, e.g., 2018_2019.
 
@@ -61,12 +61,12 @@ bash experiments/lstm/run.sh
 ```
 or directly execute the Python file in the terminal:
 ```
-python experiments/lstm/main.py --device cuda:2 --dataset CA --years 2019 --model_name lstm --seed 2018 --bs 32
+python experiments/lstm/main.py --device cuda:2 --dataset SD --years 2019 --model_name lstm --seed 2023 --bs 64
 ```
 
 
 ## 3. Evaluate Your Model in Three Steps
-You may first go through the implementations of various baselines in our repository, which may serve as good references for experimenting your own model. The steps are described as follows.
+You may first go through the implementations of various baselines in our repository, which may serve as good references for experimenting your own model. The detailed steps are described as follows.
 - The first step is to define the model architecture, and place it into `src/models`. To ensure compatibility with the existing framework, it is recommended that your model inherits the BaseModel class (implemented in `src/base/model.py`).
 - If your model does not require any special training or testing procedures beyond the standard workflow provided by the BaseEngine class (implemented in `src/base/engine.py`), you can directly use it for training and evaluation. Otherwise, please include a file in the folder `src/engines`.
 - To integrate your model and engine files, you need to create a `main.py` file in the `experiments/your_model_name` directory.
@@ -79,10 +79,10 @@ The LargeST benchmark dataset is released under a CC BY-NC 4.0 International Lic
 ## 5. Citation
 If you find our work useful in your research, please cite:
 ```
-@article{liu2023large,
+@inproceedings{liu2023largest,
   title={LargeST: A Benchmark Dataset for Large-Scale Traffic Forecasting},
   author={Liu, Xu and Xia, Yutong and Liang, Yuxuan and Hu, Junfeng and Wang, Yiwei and Bai, Lei and Huang, Chao and Liu, Zhenguang and Hooi, Bryan and Zimmermann, Roger},
-  journal={arXiv preprint arXiv:2306.08259},
+  booktitle={Advances in Neural Information Processing Systems},
   year={2023}
 }
 ```
