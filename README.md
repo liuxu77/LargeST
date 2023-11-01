@@ -85,4 +85,6 @@ If you find our work useful in your research, please cite:
   booktitle={Advances in Neural Information Processing Systems},
   year={2023}
 }
+
+Thank you for your interest in our work!
 ```
