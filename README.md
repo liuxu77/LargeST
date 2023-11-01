@@ -86,5 +86,4 @@ If you find our work useful in your research, please cite:
   year={2023}
 }
 
-Thank you for your interest in our work!
 ```
